@@ -1,0 +1,77 @@
+package com.github.newtllewellyn.dao;
+
+import java.math.BigDecimal;
+
+import org.apache.ibatis.annotations.Arg;
+import org.apache.ibatis.annotations.Case;
+import org.apache.ibatis.annotations.ConstructorArgs;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+
+import com.github.newtllewellyn.book.Book;
+import com.github.newtllewellyn.book.BookInterface;
+import com.github.newtllewellyn.book.Journal;
+
+import org.apache.ibatis.annotations.TypeDiscriminator;
+import org.apache.ibatis.type.JdbcType;
+
+
+public interface BookDao {
+	@Insert("INSERT INTO student(bookid, bookname, author, price, "
+			+ "isbn, press) VALUES(#{uuid}, #{name}, #{author}, " 
+			+ "#{price}, #{isbn}, #{press})")
+	public void saveBook(Book book);
+	
+	
+	
+	@Results({ 
+		@Result(id=true, column = "bookid", jdbcType = JdbcType.VARCHAR, property = "uuid", javaType = String.class),
+		@Result(column = "bookname", jdbcType = JdbcType.VARCHAR, property = "name", javaType = String.class),
+		@Result(column = "author", jdbcType = JdbcType.VARCHAR, property = "author", javaType = String.class),
+		@Result(column = "price", jdbcType = JdbcType.DOUBLE, property = "price", javaType = BigDecimal.class),
+		@Result(column = "isbn", jdbcType = JdbcType.VARCHAR, property = "isbn", javaType = String.class),
+		@Result(column = "press", jdbcType = JdbcType.VARCHAR, property = "press", javaType = String.class),
+		@Result(column = "editor", jdbcType = JdbcType.VARCHAR, property = "editor", javaType = String.class) 
+		})
+	@ConstructorArgs(value = {
+			@Arg(id = true, column = "bookid", javaType = String.class, 
+				jdbcType = JdbcType.VARCHAR, name = "bid"),
+			@Arg(column = "bookname", javaType = String.class, 
+				jdbcType = JdbcType.VARCHAR, name = "name"),
+			@Arg(column = "price", javaType = BigDecimal.class, 
+				jdbcType = JdbcType.DOUBLE, name = "price"),
+			@Arg(column = "press", javaType = String.class, 
+				jdbcType = JdbcType.VARCHAR, name = "press")
+		})
+	@TypeDiscriminator(
+			cases = { 
+				@Case(type = Book.class, value = "book"),
+				@Case(type = Journal.class, value = "journal"),
+				@Case(type = BookInterface.class, value = "absbook") }, 
+			column = "vtype")
+	@Select("SELECT * FROM book WHERE bookid = #{uuid}")
+	public BookInterface searchBookById(String uuid);
+	
+	
+
+//	@Select("SELECT bookid, bookname, vtype, author, price, isbn, press FROM"
+//			+ "book WHERE isbn=#{isbn}")
+	@Select("SELECT * FROM " + "book WHERE isbn = #{isbn}")
+	@Results({ 
+			@Result(id=true, column = "bookid", jdbcType = JdbcType.VARCHAR, property = "uuid", javaType = String.class),
+			@Result(column = "bookname", jdbcType = JdbcType.VARCHAR, property = "name", javaType = String.class),
+			@Result(column = "author", jdbcType = JdbcType.VARCHAR, property = "author", javaType = String.class),
+			@Result(column = "price", jdbcType = JdbcType.DOUBLE, property = "price", javaType = Double.class),
+			@Result(column = "isbn", jdbcType = JdbcType.VARCHAR, property = "isbn", javaType = String.class),
+			@Result(column = "press", jdbcType = JdbcType.VARCHAR, property = "press", javaType = String.class),
+			@Result(column = "editor", jdbcType = JdbcType.VARCHAR, property = "editor", javaType = String.class) })
+	@TypeDiscriminator(
+		cases = { 
+			@Case(type = Book.class, value = "book"),
+			@Case(type = Journal.class, value = "journal"),
+			@Case(type = BookInterface.class, value = "absbook") }, 
+		column = "vtype")
+	public Book searchBook(String isbn);
+}
