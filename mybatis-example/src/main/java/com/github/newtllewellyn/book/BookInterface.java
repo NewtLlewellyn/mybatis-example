@@ -9,7 +9,13 @@ public class BookInterface {
 	protected String press;
 	private String uuid;
 	
+	
 		
+	public BookInterface() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public BookInterface(String bid, String name, BigDecimal price, String press) {
 		this.name = name;
 		this.price = price;

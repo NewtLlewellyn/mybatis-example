@@ -6,6 +6,11 @@ public class Book extends BookInterface {
 	private String isbn;
 	private String author;
 	
+	
+
+	public Book() {
+		super();
+	}
 
 	public Book(String uuid, String name, BigDecimal price, String press) {
 		super(uuid, name, price, press);
