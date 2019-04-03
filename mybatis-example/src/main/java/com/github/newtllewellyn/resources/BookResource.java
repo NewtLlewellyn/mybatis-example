@@ -16,6 +16,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.github.newtllewellyn.JacksonUtil;
@@ -24,11 +28,22 @@ import com.github.newtllewellyn.book.Book;
 import com.github.newtllewellyn.book.BookInterface;
 import com.github.newtllewellyn.dao.BookDao;
 
-@Path("books")
+
+@Service
+@Component
+@Path("/books")
 public class BookResource {
 
+//	@Autowired
+//    private ISomeService someService;
+	
 	private static Logger log = Logger.getLogger(BookResource.class.getName());
 
+	@GET
+	public String pppp() {
+		return "ok";
+	}
+	
 	@DELETE  @Path("{bookid}")
 	public void deleteBook(@PathParam("bookid") String bookId) {
 		BookDao dao = MyBatisInit.getDao(BookDao.class);
@@ -82,6 +97,7 @@ public class BookResource {
 	 * @return String that will be returned as a text/plain response.
 	 */
 	@GET
+	@Path("get")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getIt(@QueryParam("bookid") String bookid) {
 		try {

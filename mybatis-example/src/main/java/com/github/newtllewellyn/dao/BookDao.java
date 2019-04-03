@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Case;
 import org.apache.ibatis.annotations.ConstructorArgs;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -19,6 +20,8 @@ import org.apache.ibatis.annotations.TypeDiscriminator;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
 
+
+@Mapper
 public interface BookDao {
 	@Insert("INSERT INTO book(bookid, bookname, author, price, "
 			+ "isbn, press, vtype) VALUES(#{uuid}, #{name}, #{author}, " + "#{price}, #{isbn}, #{press}, 'book')")

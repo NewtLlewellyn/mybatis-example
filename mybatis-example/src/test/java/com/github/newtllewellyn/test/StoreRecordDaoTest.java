@@ -1,12 +1,14 @@
 package com.github.newtllewellyn.test;
 
 import org.apache.ibatis.session.SqlSession;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.github.newtllewellyn.MyBatisInit;
 import com.github.newtllewellyn.dao.StudentDao;
 import com.github.newtllewellyn.user.Student;
 
+@Ignore
 public class StoreRecordDaoTest {
 	@Test
 	public void testSave() {

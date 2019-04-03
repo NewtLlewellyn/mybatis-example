@@ -10,6 +10,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -21,9 +25,14 @@ import com.github.newtllewellyn.user.Student;
 /**
  * Root resource (exposed at "myresource" path)
  */
+@Service
+@Component
 @Path("students")
 public class StudentResource {
-
+	
+//	@Autowired
+//    private ISomeService someService;
+	
 	private static Logger log = Logger.getLogger(StudentResource.class.getName());
 
 	/**

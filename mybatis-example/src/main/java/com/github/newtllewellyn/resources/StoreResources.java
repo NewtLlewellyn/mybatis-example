@@ -10,6 +10,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.github.newtllewellyn.JacksonUtil;
@@ -17,8 +21,14 @@ import com.github.newtllewellyn.MyBatisInit;
 import com.github.newtllewellyn.dao.StoreRecordDao;
 import com.github.newtllewellyn.store.StoreRecord;
 
+@Service
+@Component
 @Path("stores")
 public class StoreResources {
+	
+//	@Autowired
+//    private ISomeService someService;
+	
 	private static Logger log = Logger.getLogger(StoreResources.class.getName());
 
 	/**

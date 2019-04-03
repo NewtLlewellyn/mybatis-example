@@ -1,6 +1,7 @@
 package com.github.newtllewellyn.dao;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -8,6 +9,8 @@ import org.apache.ibatis.annotations.One;
 
 import com.github.newtllewellyn.record.BorrowRecord;
 
+
+@Mapper
 public interface BorrowRecordDao {
 
 	@Insert("INSERT INTO recordlist(recid, bookid, stuid, borrowdate, "

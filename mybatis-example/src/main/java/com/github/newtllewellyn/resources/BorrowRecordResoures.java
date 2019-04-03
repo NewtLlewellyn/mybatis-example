@@ -10,6 +10,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.github.newtllewellyn.JacksonUtil;
@@ -18,8 +22,12 @@ import com.github.newtllewellyn.dao.BorrowRecordDao;
 import com.github.newtllewellyn.record.BorrowRecord;
 import com.github.newtllewellyn.record.RecordList;
 
+@Service
+@Component
 @Path("recordlists")
 public class BorrowRecordResoures {
+	
+	
 	private static Logger log = Logger.getLogger(BorrowRecordResoures.class.getName());
 
 	/**

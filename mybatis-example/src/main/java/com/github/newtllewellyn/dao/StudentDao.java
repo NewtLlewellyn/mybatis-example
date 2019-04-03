@@ -3,6 +3,7 @@ package com.github.newtllewellyn.dao;
 import org.apache.ibatis.annotations.Arg;
 import org.apache.ibatis.annotations.ConstructorArgs;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -10,6 +11,8 @@ import org.apache.ibatis.type.JdbcType;
 
 import com.github.newtllewellyn.user.Student;
 
+
+@Mapper
 public interface StudentDao {
 	@Insert("INSERT INTO student(stuid, stuname) VALUES(#{id}, #{name})")
 	public void saveStudent(Student student);
